@@ -17,7 +17,7 @@ and run with
 $ ./run_CCD.py
 """
 
-i_time = 2200
+i_time = 10
 scans = 30
 mode = 0
 trigout = 0
@@ -48,7 +48,12 @@ while True:
             with open(datafile,'r') as ipfile:
               for line in ipfile:
                 datan = line[:-1].split(',')
-                data = np.append(data,[datan],axis=0)
+                print('data size:', len(datan))
+                try:
+                    data = np.append(data,[datan],axis=0)
+                except:
+                    print("Error???...")
+                    continue
             data = data[1:].astype(np.int)
             print('data', data, np.size(data))
             print('prom',np.mean(data,axis=0))
